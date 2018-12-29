@@ -13,9 +13,9 @@
 
 #include "../../includes/ft_printf.h"
 
-void	ft_lstaddend(t_list **alst, t_list *nxt)
+void	ft_lstaddend(t_ftprintf **alst, t_ftprintf *nxt)
 {
-	t_list	*curr;
+	t_ftprintf	*curr;
 
 	if (!*alst)
 		*alst = nxt;

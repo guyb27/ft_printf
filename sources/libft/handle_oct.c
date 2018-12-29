@@ -79,7 +79,7 @@ static intmax_t		get_arg(t_ftprintf_flags *spec, va_list args)
 	return (arg);
 }
 
-t_list				*ftprintf_handle_oct(t_ftprintf_flags *spec, va_list args)
+t_ftprintf				*ftprintf_handle_oct(t_ftprintf_flags *spec, va_list args)
 {
 	char		*rst;
 	char		*tmp;

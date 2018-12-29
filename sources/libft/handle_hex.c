@@ -79,7 +79,7 @@ static void		flag_hash(char **rst, int *i, t_ftprintf_flags *spec)
 	}
 }
 
-t_list			*ftprintf_handle_hex(t_ftprintf_flags *spec, va_list args)
+t_ftprintf			*ftprintf_handle_hex(t_ftprintf_flags *spec, va_list args)
 {
 	char		*rst;
 	char		*tmp;

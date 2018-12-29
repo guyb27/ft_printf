@@ -76,12 +76,12 @@ int	ft_fprintf(char *str, const char *format, ...)
 	return (ret);
 }
 
-int	ft_inner_printf(int (*f)(void**, t_list*), void **fd, va_list args,
+int	ft_inner_printf(int (*f)(void**, t_ftprintf*), void **fd, va_list args,
 		const char *format)
 {
 	char		*str;
 	int			i;
-	t_list		*list;
+	t_ftprintf		*list;
 	int			ret;
 
 	str = (char*)format;

@@ -13,7 +13,7 @@
 
 #include "../../includes/ft_printf.h"
 
-t_list				*zeroprec(t_ftprintf_flags *spec)
+t_ftprintf				*zeroprec(t_ftprintf_flags *spec)
 {
 	char	*rst;
 	int		len;
@@ -94,7 +94,7 @@ static uintmax_t	get_arg(t_ftprintf_flags *spec, va_list args)
 	return (arg);
 }
 
-t_list				*ftprintf_handle_unsigned_int(t_ftprintf_flags *spec, va_list args)
+t_ftprintf				*ftprintf_handle_unsigned_int(t_ftprintf_flags *spec, va_list args)
 {
 	char		*rst;
 	char		*tmp;

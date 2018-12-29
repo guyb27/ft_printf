@@ -13,9 +13,9 @@
 
 #include "../../includes/ft_printf.h"
 
-void	ft_lstdel(t_list **alst)
+void	ft_lstdel(t_ftprintf **alst)
 {
-	t_list	*next;
+	t_ftprintf	*next;
 
 	while (*alst)
 	{

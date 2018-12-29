@@ -13,7 +13,7 @@
 
 #include "../../includes/ft_printf.h"
 
-static void		lstjoin(t_list *lst2, t_list **lst)
+static void		lstjoin(t_ftprintf *lst2, t_ftprintf **lst)
 {
 	int			i;
 	int			j;
@@ -35,10 +35,10 @@ static void		lstjoin(t_list *lst2, t_list **lst)
 	(*lst)->str = s;
 }
 
-static t_list	*lstjoin_free(t_list *lst)
+static t_ftprintf	*lstjoin_free(t_ftprintf *lst)
 {
-	t_list		*rst;
-	t_list		*tmp;
+	t_ftprintf		*rst;
+	t_ftprintf		*tmp;
 
 	while (lst->next)
 	{
@@ -51,9 +51,9 @@ static t_list	*lstjoin_free(t_list *lst)
 	return (lst);
 }
 
-int				ft_lstfprint(void **str, t_list *lst)
+int				ft_lstfprint(void **str, t_ftprintf *lst)
 {
-	t_list		*tmp;
+	t_ftprintf		*tmp;
 	int			fd;
 
 	if (access((char*)*str, W_OK))
@@ -73,9 +73,9 @@ int				ft_lstfprint(void **str, t_list *lst)
 	return (tmp->size);
 }
 
-int				ft_lstsprint(void **str, t_list *lst)
+int				ft_lstsprint(void **str, t_ftprintf *lst)
 {
-	t_list		*tmp;
+	t_ftprintf		*tmp;
 
 	tmp = lst;
 	tmp = lstjoin_free(lst);
@@ -83,9 +83,9 @@ int				ft_lstsprint(void **str, t_list *lst)
 	return (tmp->size);
 }
 
-int				ft_lstprint(void **fd, t_list *lst)
+int				ft_lstprint(void **fd, t_ftprintf *lst)
 {
-	t_list		*tmp;
+	t_ftprintf		*tmp;
 
 	tmp = lstjoin_free(lst);
 	write(*((int*)fd[0]), tmp->str, tmp->size);

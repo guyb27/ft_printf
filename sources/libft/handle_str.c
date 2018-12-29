@@ -23,13 +23,13 @@ static int	mallsize(t_ftprintf_flags *spec, char *arg)
 	return (MAX(tmp, spec->width));
 }
 
-t_list		*ftprintf_handle_str(t_ftprintf_flags *spec, va_list args)
+t_ftprintf		*ftprintf_handle_str(t_ftprintf_flags *spec, va_list args)
 {
 	char	*arg;
 	char	*rst;
 	int		i[2];
 	int		len;
-	t_list	*ret;
+	t_ftprintf	*ret;
 
 	if ((arg = va_arg(args, char*)) == NULL)
 		arg = "(null)";

@@ -30,12 +30,12 @@
 enum					e_flags {hash, zero, minus, plus, space, maj_l};
 enum					e_size {none, hh, h, l, ll, j, z};
 
-typedef struct			s_list
+typedef struct			s_ftprintf
 {
 	char				*str;
 	int					size;
-	struct s_list		*next;
-}						t_list;
+	struct s_ftprintf	*next;
+}						t_ftprintf;
 
 typedef struct			s_ftprintf_flags
 {
@@ -49,16 +49,16 @@ typedef struct			s_ftprintf_flags
 typedef struct			s_ftprintf_handlers
 {
 	char				conv;
-	t_list				*(*fct_handle)(t_ftprintf_flags*, va_list);
+	t_ftprintf			*(*fct_handle)(t_ftprintf_flags*, va_list);
 }						t_ftprintf_handlers;
 
-void					ft_lstaddend(t_list **alst, t_list *nxt);
-void					ft_lstdel(t_list **alst);
-t_list					*ft_lstnew(char *str, size_t len);
-size_t					ft_lstlen(t_list *list);
-int						ft_lstprint(void **fd, t_list *lst);
-int						ft_lstsprint(void **fd, t_list *lst);
-int						ft_lstfprint(void **fd, t_list *lst);
+void					ft_lstaddend(t_ftprintf **alst, t_ftprintf *nxt);
+void					ft_lstdel(t_ftprintf **alst);
+t_ftprintf					*ft_lstnew(char *str, size_t len);
+size_t					ft_lstlen(t_ftprintf *list);
+int						ft_lstprint(void **fd, t_ftprintf *lst);
+int						ft_lstsprint(void **fd, t_ftprintf *lst);
+int						ft_lstfprint(void **fd, t_ftprintf *lst);
 
 t_ftprintf_flags		*parse(char *arg);
 void					set_t_flags(t_ftprintf_flags *spec);
@@ -95,20 +95,20 @@ void					*ft_tabset(size_t len);
 void					ft_memdel(void **ap);
 
 
-t_list					*handle(char **str, va_list args, int i);
-t_list					*select_conv(t_ftprintf_flags *spec, va_list args);
-t_list					*ftprintf_handle_percent(t_ftprintf_flags *spec, va_list args);
-t_list					*ftprintf_handle_char(t_ftprintf_flags *spec, va_list args);
-t_list					*ftprintf_handle_str(t_ftprintf_flags *spec, va_list args);
-t_list					*ftprintf_handle_p(t_ftprintf_flags *spec, va_list args);
-t_list					*ftprintf_handle_signed_int(t_ftprintf_flags *spec,
+t_ftprintf					*handle(char **str, va_list args, int i);
+t_ftprintf					*select_conv(t_ftprintf_flags *spec, va_list args);
+t_ftprintf					*ftprintf_handle_percent(t_ftprintf_flags *spec, va_list args);
+t_ftprintf					*ftprintf_handle_char(t_ftprintf_flags *spec, va_list args);
+t_ftprintf					*ftprintf_handle_str(t_ftprintf_flags *spec, va_list args);
+t_ftprintf					*ftprintf_handle_p(t_ftprintf_flags *spec, va_list args);
+t_ftprintf					*ftprintf_handle_signed_int(t_ftprintf_flags *spec,
 						va_list args);
-t_list					*ftprintf_handle_unsigned_int(t_ftprintf_flags *spec,
+t_ftprintf					*ftprintf_handle_unsigned_int(t_ftprintf_flags *spec,
 						va_list args);
-t_list					*ftprintf_handle_hex(t_ftprintf_flags *spec, va_list args);
-t_list					*ftprintf_handle_oct(t_ftprintf_flags *spec, va_list args);
-t_list					*ftprintf_handle_float(t_ftprintf_flags *spec, va_list args);
-t_list					*zeroprec(t_ftprintf_flags *spec);
+t_ftprintf					*ftprintf_handle_hex(t_ftprintf_flags *spec, va_list args);
+t_ftprintf					*ftprintf_handle_oct(t_ftprintf_flags *spec, va_list args);
+t_ftprintf					*ftprintf_handle_float(t_ftprintf_flags *spec, va_list args);
+t_ftprintf					*zeroprec(t_ftprintf_flags *spec);
 void					ft_printf_utils_norme(char **rst, int *i, char *tmp);
 
 
@@ -116,7 +116,7 @@ int						ft_printf(const char *format, ...);
 int						ft_dprintf(int fd, const char *format, ...);
 int						ft_sprintf(char **str, const char *format, ...);
 int						ft_fprintf(char *str, const char *format, ...);
-int						ft_inner_printf(int (*f)(void**, t_list*), void **fd,
+int						ft_inner_printf(int (*f)(void**, t_ftprintf*), void **fd,
 						va_list args, const char *format);
 
 #endif

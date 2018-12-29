@@ -13,11 +13,11 @@
 
 #include "../../includes/ft_printf.h"
 
-t_list				*handle(char **str, va_list args, int a)
+t_ftprintf				*handle(char **str, va_list args, int a)
 {
 	t_ftprintf_flags		*spec;
 	int			i;
-	t_list		*curr_list;
+	t_ftprintf		*curr_list;
 
 	i = a;
 	while ((*str)[i] && is_valid((*str)[i]) && !is_conv((*str)[i]))
@@ -40,7 +40,7 @@ t_list				*handle(char **str, va_list args, int a)
 	return (curr_list);
 }
 
-static t_ftprintf_handlers	tabinit(char conv, t_list *(*fct)(t_ftprintf_flags*, va_list))
+static t_ftprintf_handlers	tabinit(char conv, t_ftprintf *(*fct)(t_ftprintf_flags*, va_list))
 {
 	t_ftprintf_handlers	ptr;
 
@@ -56,7 +56,7 @@ void				ft_printf_utils_norme(char **rst, int *i, char *tmp)
 	free(tmp);
 }
 
-t_list				*select_conv(t_ftprintf_flags *spec, va_list args)
+t_ftprintf				*select_conv(t_ftprintf_flags *spec, va_list args)
 {
 	t_ftprintf_handlers	tab_handlers[15];
 	int			i;
