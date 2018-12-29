@@ -11,7 +11,7 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../../includes/libft.h"
+#include "../../includes/ft_printf.h"
 
 int		ft_isdigit(int c)
 {

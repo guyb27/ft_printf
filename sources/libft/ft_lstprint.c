@@ -11,7 +11,7 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../../includes/lists.h"
+#include "../../includes/ft_printf.h"
 
 static void		lstjoin(t_list *lst2, t_list **lst)
 {

@@ -11,7 +11,7 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../../includes/lists.h"
+#include "../../includes/ft_printf.h"
 
 size_t		ft_lstlen(t_list *list)
 {

@@ -11,7 +11,7 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../../includes/lists.h"
+#include "../../includes/ft_printf.h"
 
 t_list	*ft_lstnew(char *str, size_t len)
 {

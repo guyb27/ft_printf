@@ -11,7 +11,7 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../../includes/lists.h"
+#include "../../includes/ft_printf.h"
 
 void	ft_lstaddend(t_list **alst, t_list *nxt)
 {

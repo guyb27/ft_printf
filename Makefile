@@ -66,7 +66,7 @@ $(NAME): $(OBJ)
 	@ar rcs $(NAME) $(OBJ)
 
 $(LIBFT_PATH)%.o: $(LIBFT)%.c
-	@gcc -c $(FLAGS) $(LIBFT)
+	@gcc -c $(FLAGS) $(LIBFT) -I ./includes/ft_printf.h
 
 valgrind:
 	@gcc -ggdb3 ./sources/*/*.c test.c -I includes

@@ -11,7 +11,7 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../../includes/libft.h"
+#include "../../includes/ft_printf.h"
 
 char	*ft_strnjoin(char *s1, char *s2, int n)
 {

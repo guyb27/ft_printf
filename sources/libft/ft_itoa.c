@@ -11,7 +11,7 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../../includes/libft.h"
+#include "../../includes/ft_printf.h"
 
 static long long int	ft_pow(long long int nb, int pow)
 {
