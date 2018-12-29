@@ -13,7 +13,7 @@
 
 #include "../../includes/ft_printf.h"
 
-static int				mallsize(t_flags *spec, long double i)
+static int				mallsize(t_ftprintf_flags *spec, long double i)
 {
 	int		rst;
 
@@ -31,21 +31,21 @@ static int				mallsize(t_flags *spec, long double i)
 	return (rst);
 }
 
-static int				is_space(t_flags *spec, char *tmp, intmax_t len, int i)
+static int				is_space(t_ftprintf_flags *spec, char *tmp, intmax_t len, int i)
 {
 	if (spec->flags[minus])
 		return (0);
 	return (!spec->flags[zero] && i < len - ft_strlen(tmp));
 }
 
-static int				is_zero(t_flags *spec, char *tmp, intmax_t len, int i)
+static int				is_zero(t_ftprintf_flags *spec, char *tmp, intmax_t len, int i)
 {
 	if (spec->flags[minus])
 		return (0);
 	return (i < len - ft_strlen(tmp));
 }
 
-static long double		get_arg(t_flags *spec, va_list args)
+static long double		get_arg(t_ftprintf_flags *spec, va_list args)
 {
 	long double	arg;
 
@@ -58,7 +58,7 @@ static long double		get_arg(t_flags *spec, va_list args)
 	return (arg);
 }
 
-t_list					*ftprintf_handle_float(t_flags *spec, va_list args)
+t_list					*ftprintf_handle_float(t_ftprintf_flags *spec, va_list args)
 {
 	char		*rst;
 	char		*tmp;

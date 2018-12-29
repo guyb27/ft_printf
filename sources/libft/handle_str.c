@@ -13,7 +13,7 @@
 
 #include "../../includes/handlers.h"
 
-static int	mallsize(t_flags *spec, char *arg)
+static int	mallsize(t_ftprintf_flags *spec, char *arg)
 {
 	int		tmp;
 
@@ -23,7 +23,7 @@ static int	mallsize(t_flags *spec, char *arg)
 	return (MAX(tmp, spec->width));
 }
 
-t_list		*ftprintf_handle_str(t_flags *spec, va_list args)
+t_list		*ftprintf_handle_str(t_ftprintf_flags *spec, va_list args)
 {
 	char	*arg;
 	char	*rst;

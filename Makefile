@@ -34,38 +34,31 @@ LIBFT = sources/libft/ft_bzero.c \
 		sources/libft/ft_strisdigit.c \
 		sources/libft/ft_strsub.c \
 		sources/libft/ft_strnew.c \
-
-LISTS_PATH = ./sources/lists
-
-LISTS = sources/lists/ft_lstdel.c \
-		sources/lists/ft_lstaddend.c \
-		sources/lists/ft_lstlen.c \
-		sources/lists/ft_lstnew.c \
-		sources/lists/ft_lstprint.c \
-
-PARSE_PATH = ./sources/parse
-
-PARSE = sources/parse/parse_tests.c \
-		sources/parse/parsing.c \
-
-HANDLERS_PATH = ./sources/handlers
-
-HANDLERS = sources/handlers/ft_printf.c \
-		   sources/handlers/handle.c \
-		   sources/handlers/handle_percent.c \
-		   sources/handlers/handle_char.c \
-		   sources/handlers/handle_str.c \
-		   sources/handlers/handle_signed_int.c \
-		   sources/handlers/handle_unsigned_int.c \
-		   sources/handlers/handle_hex.c \
-		   sources/handlers/handle_oct.c \
-		   sources/handlers/handle_p.c \
-		   sources/handlers/handle_float.c \
+		sources/libft/ft_printf.c \
+		sources/libft/handle.c \
+		sources/libft/handle_percent.c \
+		sources/libft/handle_char.c \
+		sources/libft/handle_str.c \
+		sources/libft/handle_signed_int.c \
+		sources/libft/handle_unsigned_int.c \
+		sources/libft/handle_hex.c \
+		sources/libft/handle_oct.c \
+		sources/libft/handle_p.c \
+		sources/libft/handle_float.c \
+		sources/libft/parse_tests.c \
+		sources/libft/parsing.c \
+		sources/libft/ft_lstdel.c \
+		sources/libft/ft_lstaddend.c \
+		sources/libft/ft_lstlen.c \
+		sources/libft/ft_lstnew.c \
+		sources/libft/ft_lstprint.c \
 
 
-SRCS = $(LIBFT) $(LISTS) $(PARSE)
 
-OBJ = $(LIBFT:.c=.o) $(LISTS:.c=.o) $(PARSE:.c=.o) $(HANDLERS:.c=.o)
+
+SRCS = $(LIBFT)
+
+OBJ = $(LIBFT:.c=.o)
 
 all: $(NAME)
 
@@ -74,15 +67,6 @@ $(NAME): $(OBJ)
 
 $(LIBFT_PATH)%.o: $(LIBFT)%.c
 	@gcc -c $(FLAGS) $(LIBFT)
-
-$(LISTS_PATH)%.o: $(LISTS)%.c
-	@gcc -c $(FLAGS) $(LISTS)
-
-$(PARSE_PATH)%.o: $(PARSE)%.c
-	@gcc -c $(FLAGS) $(PARSE)
-
-$(HANDLERS_PATH)%.o: $(HANDLERS)%.c
-	@gcc - c $(FLAGS) $(HANDLERS)
 
 valgrind:
 	@gcc -ggdb3 ./sources/*/*.c test.c -I includes

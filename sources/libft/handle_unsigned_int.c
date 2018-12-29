@@ -13,7 +13,7 @@
 
 #include "../../includes/ft_printf.h"
 
-t_list				*zeroprec(t_flags *spec)
+t_list				*zeroprec(t_ftprintf_flags *spec)
 {
 	char	*rst;
 	int		len;
@@ -37,7 +37,7 @@ t_list				*zeroprec(t_flags *spec)
 	return (ft_lstnew(rst, len));
 }
 
-static int			is_space(t_flags *spec, char *tmp, intmax_t len, int i)
+static int			is_space(t_ftprintf_flags *spec, char *tmp, intmax_t len, int i)
 {
 	if (!spec->flags[zero])
 		return (i < len - (MAX((int)ft_strlen(tmp),
@@ -57,7 +57,7 @@ static int			is_space(t_flags *spec, char *tmp, intmax_t len, int i)
 	}
 }
 
-static int			is_zero(t_flags *spec, char *tmp, intmax_t len, int *i)
+static int			is_zero(t_ftprintf_flags *spec, char *tmp, intmax_t len, int *i)
 {
 	if (spec->flags[minus] && ft_strlen(tmp) < len)
 	{
@@ -70,7 +70,7 @@ static int			is_zero(t_flags *spec, char *tmp, intmax_t len, int *i)
 		return (i[0] < len - (ft_strlen(tmp) - i[1]));
 }
 
-static uintmax_t	get_arg(t_flags *spec, va_list args)
+static uintmax_t	get_arg(t_ftprintf_flags *spec, va_list args)
 {
 	uintmax_t	arg;
 
@@ -94,7 +94,7 @@ static uintmax_t	get_arg(t_flags *spec, va_list args)
 	return (arg);
 }
 
-t_list				*ftprintf_handle_unsigned_int(t_flags *spec, va_list args)
+t_list				*ftprintf_handle_unsigned_int(t_ftprintf_flags *spec, va_list args)
 {
 	char		*rst;
 	char		*tmp;

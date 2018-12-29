@@ -14,7 +14,7 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 # include "ft_printf.h"
-
+/*
 char			*ft_strchr(const char *s, int c);
 char			*ft_strdup(const char *src);
 char			*ft_strcut(const char *s, size_t i);
@@ -36,5 +36,5 @@ void			ft_bzero(void *s, size_t n);
 void			*ft_memalloc(size_t size);
 void			*ft_tabset(size_t len);
 void			ft_memdel(void **ap);
-
+*/
 #endif

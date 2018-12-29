@@ -14,15 +14,15 @@
 #ifndef LISTS_H
 # define LISTS_H
 # include "ft_printf.h"
-
+/*
 typedef struct s_list	t_list;
 
-struct			s_list
+typedef struct			s_list
 {
 	char	*str;
 	int		size;
-	t_list	*next;
-};
+	struct s_list	*next;
+}				t_list;
 
 void			ft_lstaddend(t_list **alst, t_list *nxt);
 void			ft_lstdel(t_list **alst);
@@ -31,5 +31,5 @@ size_t			ft_lstlen(t_list *list);
 int				ft_lstprint(void **fd, t_list *lst);
 int				ft_lstsprint(void **fd, t_list *lst);
 int				ft_lstfprint(void **fd, t_list *lst);
-
+*/
 #endif

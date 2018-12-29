@@ -13,11 +13,11 @@
 
 #include "../../includes/parse.h"
 
-t_flags		*parse(char *arg)
+t_ftprintf_flags		*parse(char *arg)
 {
-	t_flags		*spec;
+	t_ftprintf_flags		*spec;
 
-	if ((spec = (t_flags*)ft_memalloc(sizeof(*spec))) == NULL)
+	if ((spec = (t_ftprintf_flags*)ft_memalloc(sizeof(*spec))) == NULL)
 		return (NULL);
 	set_t_flags(spec);
 	while (!is_conv(*arg) && (*arg))
@@ -42,7 +42,7 @@ t_flags		*parse(char *arg)
 	return (spec);
 }
 
-void		set_t_flags(t_flags *spec)
+void		set_t_flags(t_ftprintf_flags *spec)
 {
 	spec->flags[0] = 0;
 	spec->flags[1] = 0;
@@ -56,7 +56,7 @@ void		set_t_flags(t_flags *spec)
 	spec->conv = '0';
 }
 
-void		def_flags(char c, t_flags *spec)
+void		def_flags(char c, t_ftprintf_flags *spec)
 {
 	if (c == '#')
 		spec->flags[hash] = 1;
@@ -87,7 +87,7 @@ int			mini_atoi(char **arg)
 	return (rst);
 }
 
-void		def_size(char **arg, t_flags *spec)
+void		def_size(char **arg, t_ftprintf_flags *spec)
 {
 	if (**arg == 'h' && spec->size <= hh)
 	{

@@ -15,7 +15,7 @@
 
 t_list				*handle(char **str, va_list args, int a)
 {
-	t_flags		*spec;
+	t_ftprintf_flags		*spec;
 	int			i;
 	t_list		*curr_list;
 
@@ -40,9 +40,9 @@ t_list				*handle(char **str, va_list args, int a)
 	return (curr_list);
 }
 
-static t_handlers	tabinit(char conv, t_list *(*fct)(t_flags*, va_list))
+static t_ftprintf_handlers	tabinit(char conv, t_list *(*fct)(t_ftprintf_flags*, va_list))
 {
-	t_handlers	ptr;
+	t_ftprintf_handlers	ptr;
 
 	ptr.conv = conv;
 	ptr.fct_handle = fct;
@@ -56,9 +56,9 @@ void				ft_printf_utils_norme(char **rst, int *i, char *tmp)
 	free(tmp);
 }
 
-t_list				*select_conv(t_flags *spec, va_list args)
+t_list				*select_conv(t_ftprintf_flags *spec, va_list args)
 {
-	t_handlers	tab_handlers[15];
+	t_ftprintf_handlers	tab_handlers[15];
 	int			i;
 
 	tab_handlers[0] = tabinit('%', &ftprintf_handle_percent);
