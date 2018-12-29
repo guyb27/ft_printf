@@ -20,28 +20,28 @@ t_ftprintf				*zeroprec(t_ftprintf_flags *spec)
 	int		i;
 
 	len = MAX(spec->width, ((ft_isinstr("dDi", spec->conv) &&
-			(spec->flags[space] || spec->flags[plus])) ||
-			(ft_isinstr("oO", spec->conv) && spec->flags[hash])));
+			(spec->flags[SPACE] || spec->flags[PLUS])) ||
+			(ft_isinstr("oO", spec->conv) && spec->flags[HASH])));
 	rst = ft_memalloc(sizeof(*rst) * (len + 1));
 	i = 0;
-	if (spec->flags[minus] &&
-			((ft_isinstr("dDi", spec->conv) && spec->flags[plus]) ||
-			(ft_isinstr("oO", spec->conv && spec->flags[hash]))))
+	if (spec->flags[MINUS] &&
+			((ft_isinstr("dDi", spec->conv) && spec->flags[PLUS]) ||
+			(ft_isinstr("oO", spec->conv && spec->flags[HASH]))))
 		rst[i++] = (ft_isinstr("dDi", spec->conv) ? '+' : '0');
-	while (i < len - (ft_isinstr("dDoOi", spec->conv) && ((spec->flags[plus])
-				|| spec->flags[hash])) && !spec->flags[minus])
+	while (i < len - (ft_isinstr("dDoOi", spec->conv) && ((spec->flags[PLUS])
+				|| spec->flags[HASH])) && !spec->flags[MINUS])
 		rst[i++] = ' ';
 	if (i == len - 1)
 		rst[i++] = (ft_isinstr("dDi", spec->conv) ? '+' : '0');
 	rst[i] = '\0';
-	return (ft_lstnew(rst, len));
+	return (ftprintf_lstnew(rst, len));
 }
 
 static int			is_space(t_ftprintf_flags *spec, char *tmp, intmax_t len, int i)
 {
-	if (!spec->flags[zero])
+	if (!spec->flags[ZERO])
 		return (i < len - (MAX((int)ft_strlen(tmp),
-						spec->prec) + 2 * spec->flags[hash]));
+						spec->prec) + 2 * spec->flags[HASH]));
 	else
 	{
 		if (spec->prec == -1)
@@ -50,7 +50,7 @@ static int			is_space(t_ftprintf_flags *spec, char *tmp, intmax_t len, int i)
 		{
 			if (spec->prec < spec->width)
 				return (i < spec->width - MAX(spec->prec, ft_strlen(tmp))
-						- 2 * spec->flags[hash]);
+						- 2 * spec->flags[HASH]);
 			else
 				return (0);
 		}
@@ -59,12 +59,12 @@ static int			is_space(t_ftprintf_flags *spec, char *tmp, intmax_t len, int i)
 
 static int			is_zero(t_ftprintf_flags *spec, char *tmp, intmax_t len, int *i)
 {
-	if (spec->flags[minus] && ft_strlen(tmp) < len)
+	if (spec->flags[MINUS] && ft_strlen(tmp) < len)
 	{
 		if (spec->prec > -1)
 			return (i[0] < spec->prec - ft_strlen(tmp));
 		else
-			return (i[0] < spec->flags[hash]);
+			return (i[0] < spec->flags[HASH]);
 	}
 	else
 		return (i[0] < len - (ft_strlen(tmp) - i[1]));
@@ -77,17 +77,17 @@ static uintmax_t	get_arg(t_ftprintf_flags *spec, va_list args)
 	arg = va_arg(args, uintmax_t);
 	if (spec->conv == 'U')
 		arg = (unsigned long)arg;
-	else if (spec->size == hh)
+	else if (spec->size == HH)
 		arg = (unsigned char)arg;
-	else if (spec->size == h)
+	else if (spec->size == H)
 		arg = (unsigned short)arg;
-	else if (spec->size == l)
+	else if (spec->size == L)
 		arg = (unsigned long)arg;
-	else if (spec->size == ll)
+	else if (spec->size == LL)
 		arg = (unsigned long long)arg;
-	else if (spec->size == j)
+	else if (spec->size == J)
 		arg = (uintmax_t)arg;
-	else if (spec->size == z)
+	else if (spec->size == Z)
 		arg = (size_t)arg;
 	else
 		arg = (unsigned int)arg;
@@ -110,15 +110,15 @@ t_ftprintf				*ftprintf_handle_unsigned_int(t_ftprintf_flags *spec, va_list args
 	rst = ft_memalloc(sizeof(*rst) * (len + 1));
 	i[0] = 0;
 	i[1] = 0;
-	while (is_space(spec, tmp, len, i[0]) && !spec->flags[minus])
+	while (is_space(spec, tmp, len, i[0]) && !spec->flags[MINUS])
 		rst[(i[0])++] = ' ';
 	while (is_zero(spec, tmp, len, i))
 		rst[i[0]++] = '0';
 	while (tmp[i[1]])
 		rst[i[0]++] = tmp[i[1]++];
-	while (i[0] < len && spec->flags[minus])
+	while (i[0] < len && spec->flags[MINUS])
 		rst[i[0]++] = ' ';
 	rst[i[0]] = '\0';
 	free(tmp);
-	return (ft_lstnew(rst, len));
+	return (ftprintf_lstnew(rst, len));
 }

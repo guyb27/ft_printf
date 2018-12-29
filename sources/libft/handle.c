@@ -20,14 +20,15 @@ t_ftprintf				*handle(char **str, va_list args, int a)
 	t_ftprintf		*curr_list;
 
 	i = a;
-	while ((*str)[i] && is_valid((*str)[i]) && !is_conv((*str)[i]))
+	while ((*str)[i] && ftprintf_is_valid((*str)[i]) && 
+	!ftprintf_is_conv((*str)[i]))
 		i++;
-	if (!(*str)[i] || !is_conv((*str)[i]))
+	if (!(*str)[i] || !ftprintf_is_conv((*str)[i]))
 	{
 		*str = &(*str)[i];
-		return (ft_lstnew(NULL, -1));
+		return (ftprintf_lstnew(NULL, -1));
 	}
-	spec = parse(&(*str)[a]);
+	spec = ftprintf_parse(&(*str)[a]);
 	curr_list = select_conv(spec, args);
 	free(spec);
 	if (a > 1)

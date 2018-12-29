@@ -13,7 +13,7 @@
 
 #include "../../includes/ft_printf.h"
 
-t_ftprintf	*ft_lstnew(char *str, size_t len)
+t_ftprintf	*ftprintf_lstnew(char *str, size_t len)
 {
 	t_ftprintf	*new;
 

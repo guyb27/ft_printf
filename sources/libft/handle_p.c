@@ -24,7 +24,7 @@ t_ftprintf	*arg_zero(t_ftprintf_flags *spec)
 	len = MAX(spec->prec + 2, spec->width);
 	rst = ft_memalloc(sizeof(*rst) * len);
 	i = 0;
-	if (!spec->flags[minus])
+	if (!spec->flags[MINUS])
 		while (i < len - 3)
 			rst[i++] = ' ';
 	rst[i++] = '0';
@@ -34,7 +34,7 @@ t_ftprintf	*arg_zero(t_ftprintf_flags *spec)
 	while (i < len)
 		rst[i++] = ' ';
 	rst[i] = '\0';
-	return (ft_lstnew(rst, ft_strlen(rst)));
+	return (ftprintf_lstnew(rst, ft_strlen(rst)));
 }
 
 t_ftprintf	*ftprintf_handle_p(t_ftprintf_flags *spec, va_list args)
@@ -54,7 +54,7 @@ t_ftprintf	*ftprintf_handle_p(t_ftprintf_flags *spec, va_list args)
 	len = MAX(spec->prec + 3, MAX(ft_strlen(tmp) + 3, spec->width + 1));
 	rst = ft_memalloc(sizeof(*tmp) * len);
 	i = ft_tabset(2);
-	while (!spec->flags[minus] && spec->width > (i[0] + ft_strlen(tmp) + 2))
+	while (!spec->flags[MINUS] && spec->width > (i[0] + ft_strlen(tmp) + 2))
 		rst[(i[0])++] = ' ';
 	rst[(i[0])++] = '0';
 	rst[(i[0])++] = 'x';
@@ -63,5 +63,5 @@ t_ftprintf	*ftprintf_handle_p(t_ftprintf_flags *spec, va_list args)
 	while (i[0] < spec->width)
 		rst[(i[0])++] = ' ';
 	ft_printf_utils_norme(&rst, i, tmp);
-	return (ft_lstnew(rst, ft_strlen(rst)));
+	return (ftprintf_lstnew(rst, ft_strlen(rst)));
 }

@@ -13,23 +13,24 @@
 
 #include "../../includes/ft_printf.h"
 
-int		is_conv(const char c)
+int		ftprintf_is_conv(const char c)
 {
 	return (ft_strchr("%sdDioOuUxXcpfF", c) != NULL);
 }
 
-int		is_size(const char c)
+int		ftprintf_is_size(const char c)
 {
 	return (ft_strchr("hljz", c) != NULL);
 }
 
-int		is_flag(const char c)
+int		ftprintf_is_flag(const char c)
 {
 	return (ft_strchr("0#-+ L", c) != NULL);
 }
 
-int		is_valid(const char c)
+int		ftprintf_is_valid(const char c)
 {
-	return (is_conv(c) || is_size(c) || is_flag(c) || ft_isdigit(c)
+	return (ftprintf_is_conv(c) || ftprintf_is_size(c) || ftprintf_is_flag(c)
+	|| ft_isdigit(c)
 			|| c == '.');
 }

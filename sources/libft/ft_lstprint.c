@@ -13,7 +13,7 @@
 
 #include "../../includes/ft_printf.h"
 
-static void		lstjoin(t_ftprintf *lst2, t_ftprintf **lst)
+static void		ftprintf_lstjoin(t_ftprintf *lst2, t_ftprintf **lst)
 {
 	int			i;
 	int			j;
@@ -35,7 +35,7 @@ static void		lstjoin(t_ftprintf *lst2, t_ftprintf **lst)
 	(*lst)->str = s;
 }
 
-static t_ftprintf	*lstjoin_free(t_ftprintf *lst)
+static t_ftprintf	*ftprintf_lstjoin_free(t_ftprintf *lst)
 {
 	t_ftprintf		*rst;
 	t_ftprintf		*tmp;
@@ -43,7 +43,7 @@ static t_ftprintf	*lstjoin_free(t_ftprintf *lst)
 	while (lst->next)
 	{
 		tmp = lst->next;
-		lstjoin(tmp, &lst);
+		ftprintf_lstjoin(tmp, &lst);
 		lst->next = tmp->next ? tmp->next : NULL;
 		free(tmp->str);
 		free(tmp);
@@ -51,7 +51,7 @@ static t_ftprintf	*lstjoin_free(t_ftprintf *lst)
 	return (lst);
 }
 
-int				ft_lstfprint(void **str, t_ftprintf *lst)
+int				ftprintf_lstfprint(void **str, t_ftprintf *lst)
 {
 	t_ftprintf		*tmp;
 	int			fd;
@@ -61,7 +61,7 @@ int				ft_lstfprint(void **str, t_ftprintf *lst)
 		if ((fd = open((char*)*str,
 			O_CREAT | O_APPEND | O_WRONLY, 0770)))
 		{
-			tmp = lstjoin_free(lst);
+			tmp = ftprintf_lstjoin_free(lst);
 			write(fd, tmp->str, tmp->size);
 		}
 		else
@@ -73,21 +73,21 @@ int				ft_lstfprint(void **str, t_ftprintf *lst)
 	return (tmp->size);
 }
 
-int				ft_lstsprint(void **str, t_ftprintf *lst)
+int				ftprintf_lstsprint(void **str, t_ftprintf *lst)
 {
 	t_ftprintf		*tmp;
 
 	tmp = lst;
-	tmp = lstjoin_free(lst);
+	tmp = ftprintf_lstjoin_free(lst);
 	*str = tmp->str;
 	return (tmp->size);
 }
 
-int				ft_lstprint(void **fd, t_ftprintf *lst)
+int				ftprintf_lstprint(void **fd, t_ftprintf *lst)
 {
 	t_ftprintf		*tmp;
 
-	tmp = lstjoin_free(lst);
+	tmp = ftprintf_lstjoin_free(lst);
 	write(*((int*)fd[0]), tmp->str, tmp->size);
 	free(tmp->str);
 	return (tmp->size);

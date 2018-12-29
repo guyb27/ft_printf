@@ -22,12 +22,12 @@ t_ftprintf	*ftprintf_handle_percent(t_ftprintf_flags *spec, va_list args)
 	len = MAX(1, spec->width);
 	rst = ft_memalloc(sizeof(*rst) * (len + 1));
 	i = 0;
-	if (spec->flags[minus])
+	if (spec->flags[MINUS])
 		rst[i++] = '%';
-	while (i < len - 1 + spec->flags[minus])
-		rst[i++] = (spec->flags[zero] ? '0' : ' ');
-	if (!spec->flags[minus])
+	while (i < len - 1 + spec->flags[MINUS])
+		rst[i++] = (spec->flags[ZERO] ? '0' : ' ');
+	if (!spec->flags[MINUS])
 		rst[i++] = '%';
 	rst[i] = '\0';
-	return (ft_lstnew(rst, ft_strlen(rst)));
+	return (ftprintf_lstnew(rst, ft_strlen(rst)));
 }

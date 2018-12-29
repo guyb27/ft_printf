@@ -25,7 +25,7 @@ int	ft_printf(const char *format, ...)
 	if (!format || !*format)
 		return (0);
 	va_start(args, format);
-	ret = ft_inner_printf(ft_lstprint, &tmp, args, format);
+	ret = ft_inner_printf(ftprintf_lstprint, &tmp, args, format);
 	va_end(args);
 	return (ret);
 }
@@ -40,7 +40,7 @@ int	ft_dprintf(int fd, const char *format, ...)
 	if (!format || !*format || fd < 0)
 		return (0);
 	va_start(args, format);
-	ret = ft_inner_printf(ft_lstprint, &tmp, args, format);
+	ret = ft_inner_printf(ftprintf_lstprint, &tmp, args, format);
 	va_end(args);
 	return (ret);
 }
@@ -55,7 +55,7 @@ int	ft_sprintf(char **str, const char *format, ...)
 	if (!format || !*format)
 		return (0);
 	va_start(args, format);
-	ret = ft_inner_printf(ft_lstsprint, &tmp, args, format);
+	ret = ft_inner_printf(ftprintf_lstsprint, &tmp, args, format);
 	*str = tmp;
 	va_end(args);
 	return (ret);
@@ -71,7 +71,7 @@ int	ft_fprintf(char *str, const char *format, ...)
 	if (!format || !*format)
 		return (0);
 	va_start(args, format);
-	ret = ft_inner_printf(ft_lstfprint, &tmp, args, format);
+	ret = ft_inner_printf(ftprintf_lstfprint, &tmp, args, format);
 	va_end(args);
 	return (ret);
 }
@@ -91,13 +91,13 @@ int	ft_inner_printf(int (*f)(void**, t_ftprintf*), void **fd, va_list args,
 	{
 		if (str[i] == '%')
 		{
-			ft_lstaddend(&list, handle(&str, args, i + 1));
+			ftprintf_lstaddend(&list, handle(&str, args, i + 1));
 			i = -1;
 		}
 		i++;
 	}
 	if (i > 0)
-		ft_lstaddend(&list, ft_lstnew(ft_strcut(str, i), i));
+		ftprintf_lstaddend(&list, ftprintf_lstnew(ft_strcut(str, i), i));
 	ret = f(fd, list);
 	free(list);
 	return (ret);

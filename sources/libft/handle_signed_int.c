@@ -18,7 +18,7 @@ static int			mallsize(t_ftprintf_flags *spec, intmax_t i)
 	int		rst;
 
 	rst = 1;
-	if (i < 0 || spec->flags[plus] || spec->flags[space])
+	if (i < 0 || spec->flags[PLUS] || spec->flags[SPACE])
 	{
 		if (spec->prec > -1)
 			spec->prec++;
@@ -35,15 +35,15 @@ static int			mallsize(t_ftprintf_flags *spec, intmax_t i)
 
 static int			is_space(t_ftprintf_flags *spec, char *tmp, intmax_t len, int i)
 {
-	if (spec->flags[minus] && !(spec->flags[space] && i == 0))
+	if (spec->flags[MINUS] && !(spec->flags[SPACE] && i == 0))
 		return (0);
-	if (spec->flags[space] && (tmp[0] == '-' || spec->flags[plus]))
-		spec->flags[space] = 0;
-	if (spec->flags[space] && i == 0 && tmp[0] != '-')
+	if (spec->flags[SPACE] && (tmp[0] == '-' || spec->flags[PLUS]))
+		spec->flags[SPACE] = 0;
+	if (spec->flags[SPACE] && i == 0 && tmp[0] != '-')
 		return (1);
-	if (!spec->flags[zero])
-		return (i < len - (MAX((int)(ft_strlen(tmp) + spec->flags[plus]),
-						spec->prec - spec->flags[space])));
+	if (!spec->flags[ZERO])
+		return (i < len - (MAX((int)(ft_strlen(tmp) + spec->flags[PLUS]),
+						spec->prec - spec->flags[SPACE])));
 	else
 	{
 		if (spec->prec == -1)
@@ -52,7 +52,7 @@ static int			is_space(t_ftprintf_flags *spec, char *tmp, intmax_t len, int i)
 		{
 			if (spec->prec < spec->width)
 				return (i < spec->width - MAX(spec->prec, ft_strlen(tmp))
-						+ spec->flags[space]);
+						+ spec->flags[SPACE]);
 			else
 				return (0);
 		}
@@ -61,7 +61,7 @@ static int			is_space(t_ftprintf_flags *spec, char *tmp, intmax_t len, int i)
 
 static int			is_zero(t_ftprintf_flags *spec, char *tmp, intmax_t len, int *i)
 {
-	if (spec->flags[minus] && ft_strlen(tmp) < spec->prec)
+	if (spec->flags[MINUS] && ft_strlen(tmp) < spec->prec)
 	{
 		if (spec->prec > -1)
 			return (i[0] - (tmp[0] == '-') < spec->prec - ft_strlen(tmp));
@@ -79,17 +79,17 @@ static intmax_t		get_arg(t_ftprintf_flags *spec, va_list args)
 	arg = va_arg(args, intmax_t);
 	if (spec->conv == 'D')
 		arg = (long int)arg;
-	else if (spec->size == hh)
+	else if (spec->size == HH)
 		arg = (char)arg;
-	else if (spec->size == h)
+	else if (spec->size == H)
 		arg = (short int)arg;
-	else if (spec->size == l)
+	else if (spec->size == L)
 		arg = (long int)arg;
-	else if (spec->size == ll)
+	else if (spec->size == LL)
 		arg = (long long int)arg;
-	else if (spec->size == j)
+	else if (spec->size == J)
 		arg = (intmax_t)arg;
-	else if (spec->size == z)
+	else if (spec->size == Z)
 		arg = (size_t)arg;
 	else
 		arg = (int)arg;
@@ -113,14 +113,14 @@ t_ftprintf				*ftprintf_handle_signed_int(t_ftprintf_flags *spec, va_list args)
 	i = ft_tabset(2);
 	while (is_space(spec, tmp, len, i[0]))
 		rst[(i[0])++] = ' ';
-	if (tmp[i[1]] == '-' || spec->flags[plus])
+	if (tmp[i[1]] == '-' || spec->flags[PLUS])
 		rst[i[0]++] = (tmp[i[1]] == '-' ? tmp[i[1]++] : '+');
 	while (is_zero(spec, tmp, len, i))
 		rst[i[0]++] = '0';
 	while (tmp[i[1]])
 		rst[i[0]++] = tmp[i[1]++];
-	while (i[0] < len && spec->flags[minus])
+	while (i[0] < len && spec->flags[MINUS])
 		rst[i[0]++] = ' ';
 	ft_printf_utils_norme(&rst, i, tmp);
-	return (ft_lstnew(rst, len));
+	return (ftprintf_lstnew(rst, len));
 }

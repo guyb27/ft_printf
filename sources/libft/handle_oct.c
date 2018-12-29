@@ -18,17 +18,17 @@ static int			mallsize(intmax_t arg, t_ftprintf_flags *spec, char *tmp)
 	int		len;
 
 	if (arg == 0)
-		spec->flags[hash] = 0;
-	len = MAX((int)ft_strlen(tmp) + spec->flags[hash],
+		spec->flags[HASH] = 0;
+	len = MAX((int)ft_strlen(tmp) + spec->flags[HASH],
 			(MAX(spec->width, spec->prec)));
 	return (len);
 }
 
 static int			is_space(t_ftprintf_flags *spec, char *tmp, intmax_t len, int i)
 {
-	if (!spec->flags[zero])
+	if (!spec->flags[ZERO])
 		return (i < len - (MAX((int)ft_strlen(tmp),
-						spec->prec - spec->flags[hash]) + spec->flags[hash]));
+						spec->prec - spec->flags[HASH]) + spec->flags[HASH]));
 	else
 	{
 		if (spec->prec == -1)
@@ -37,7 +37,7 @@ static int			is_space(t_ftprintf_flags *spec, char *tmp, intmax_t len, int i)
 		{
 			if (spec->prec < spec->width)
 				return (i < spec->width - MAX(spec->prec, ft_strlen(tmp))
-						- spec->flags[hash]);
+						- spec->flags[HASH]);
 			else
 				return (0);
 		}
@@ -46,12 +46,12 @@ static int			is_space(t_ftprintf_flags *spec, char *tmp, intmax_t len, int i)
 
 static int			is_zero(t_ftprintf_flags *spec, char *tmp, intmax_t len, int *i)
 {
-	if (spec->flags[minus] && ft_strlen(tmp) < spec->prec)
+	if (spec->flags[MINUS] && ft_strlen(tmp) < spec->prec)
 	{
 		if (spec->prec > -1)
 			return (i[0] < spec->prec - ft_strlen(tmp));
 		else
-			return (i[0] < spec->flags[hash]);
+			return (i[0] < spec->flags[HASH]);
 	}
 	else
 		return (i[0] < len - (ft_strlen(tmp) - i[1]));
@@ -62,17 +62,17 @@ static intmax_t		get_arg(t_ftprintf_flags *spec, va_list args)
 	intmax_t	arg;
 
 	arg = va_arg(args, intmax_t);
-	if (spec->size == hh && spec->conv == 'o')
+	if (spec->size == HH && spec->conv == 'o')
 		arg = (unsigned char)arg;
-	else if (spec->size == h && spec->conv == 'o')
+	else if (spec->size == H && spec->conv == 'o')
 		arg = (unsigned short int)arg;
-	else if (spec->size == l || spec->conv == 'O')
+	else if (spec->size == L || spec->conv == 'O')
 		arg = (unsigned long int)arg;
-	else if (spec->size == ll)
+	else if (spec->size == LL)
 		arg = (unsigned long long int)arg;
-	else if (spec->size == j)
+	else if (spec->size == J)
 		arg = (intmax_t)arg;
-	else if (spec->size == z)
+	else if (spec->size == Z)
 		arg = (size_t)arg;
 	else
 		arg = (unsigned int)arg;
@@ -95,15 +95,15 @@ t_ftprintf				*ftprintf_handle_oct(t_ftprintf_flags *spec, va_list args)
 	rst = ft_memalloc(sizeof(*rst) * (len + 1));
 	i[0] = 0;
 	i[1] = 0;
-	while (is_space(spec, tmp, len, i[0]) && !spec->flags[minus])
+	while (is_space(spec, tmp, len, i[0]) && !spec->flags[MINUS])
 		rst[(i[0])++] = ' ';
 	while (is_zero(spec, tmp, len, i))
 		rst[i[0]++] = '0';
 	while (tmp[i[1]])
 		rst[i[0]++] = tmp[i[1]++];
-	while (i[0] < len && spec->flags[minus])
+	while (i[0] < len && spec->flags[MINUS])
 		rst[i[0]++] = ' ';
 	rst[i[0]] = '\0';
 	free(tmp);
-	return (ft_lstnew(rst, len));
+	return (ftprintf_lstnew(rst, len));
 }

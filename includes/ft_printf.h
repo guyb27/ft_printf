@@ -27,8 +27,8 @@
 # define MIN(a, b) ((a > b) ? b : a)
 # define ABS(a) (a > 0 ? a : -a)
 
-enum					e_flags {hash, zero, minus, plus, space, maj_l};
-enum					e_size {none, hh, h, l, ll, j, z};
+enum					e_ftprintf_flags {HASH, ZERO, MINUS, PLUS, SPACE, MAJ_L};
+enum					e_ftprintf_size {NONE, HH, H, L, LL, J, Z};
 
 typedef struct			s_ftprintf
 {
@@ -52,26 +52,22 @@ typedef struct			s_ftprintf_handlers
 	t_ftprintf			*(*fct_handle)(t_ftprintf_flags*, va_list);
 }						t_ftprintf_handlers;
 
-void					ft_lstaddend(t_ftprintf **alst, t_ftprintf *nxt);
-void					ft_lstdel(t_ftprintf **alst);
-t_ftprintf					*ft_lstnew(char *str, size_t len);
-size_t					ft_lstlen(t_ftprintf *list);
-int						ft_lstprint(void **fd, t_ftprintf *lst);
-int						ft_lstsprint(void **fd, t_ftprintf *lst);
-int						ft_lstfprint(void **fd, t_ftprintf *lst);
+void					ftprintf_lstaddend(t_ftprintf **alst, t_ftprintf *nxt);
+void					ftprintf_lstdel(t_ftprintf **alst);
+t_ftprintf				*ftprintf_lstnew(char *str, size_t len);
+size_t					ftprintf_lstlen(t_ftprintf *list);
+int						ftprintf_lstprint(void **fd, t_ftprintf *lst);
+int						ftprintf_lstsprint(void **fd, t_ftprintf *lst);
+int						ftprintf_lstfprint(void **fd, t_ftprintf *lst);
 
-t_ftprintf_flags		*parse(char *arg);
-void					set_t_flags(t_ftprintf_flags *spec);
-void					def_flags(char c, t_ftprintf_flags *spec);
-int						mini_atoi(char **arg);
-void					def_size(char **arg, t_ftprintf_flags *spec);
+t_ftprintf_flags		*ftprintf_parse(char *arg);
 
-int						is_conv(const char c);
-int						is_size(const char c);
-int						is_flag(const char c);
-int						is_valid(const char c);
+int						ftprintf_is_conv(const char c);
+int						ftprintf_is_size(const char c);
+int						ftprintf_is_flag(const char c);
+int						ftprintf_is_valid(const char c);
 
-
+//A REPRENDRE ICI
 char					*ft_strchr(const char *s, int c);
 char					*ft_strdup(const char *src);
 char					*ft_strcut(const char *s, size_t i);

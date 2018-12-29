@@ -13,7 +13,7 @@
 
 #include "../../includes/ft_printf.h"
 
-void	ft_lstdel(t_ftprintf **alst)
+void	ftprintf_lstdel(t_ftprintf **alst)
 {
 	t_ftprintf	*next;
 

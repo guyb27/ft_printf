@@ -21,17 +21,17 @@ t_ftprintf	*ftprintf_handle_char(t_ftprintf_flags *spec, va_list args)
 	int		len;
 
 	arg = va_arg(args, int);
-	if (spec->size == l)
-		return (ft_lstnew(NULL, 0));
+	if (spec->size == L)
+		return (ftprintf_lstnew(NULL, 0));
 	i = 0;
 	len = (spec->width == -1 ? 1 : spec->width);
 	str = (char*)ft_memalloc(sizeof(*str) * (len + 1));
-	if (spec->flags[minus])
+	if (spec->flags[MINUS])
 		str[i++] = arg;
-	while (i < len - !spec->flags[minus])
-		str[i++] = (spec->flags[zero] ? '0' : ' ');
+	while (i < len - !spec->flags[MINUS])
+		str[i++] = (spec->flags[ZERO] ? '0' : ' ');
 	if (i != len)
 		str[i++] = arg;
 	str[i] = '\0';
-	return (ft_lstnew(str, len));
+	return (ftprintf_lstnew(str, len));
 }

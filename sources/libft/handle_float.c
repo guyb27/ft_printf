@@ -18,7 +18,7 @@ static int				mallsize(t_ftprintf_flags *spec, long double i)
 	int		rst;
 
 	rst = 1;
-	if (i < 0 || spec->flags[plus] || spec->flags[space])
+	if (i < 0 || spec->flags[PLUS] || spec->flags[SPACE])
 		rst++;
 	while (i <= -10 || i >= 10)
 	{
@@ -33,14 +33,14 @@ static int				mallsize(t_ftprintf_flags *spec, long double i)
 
 static int				is_space(t_ftprintf_flags *spec, char *tmp, intmax_t len, int i)
 {
-	if (spec->flags[minus])
+	if (spec->flags[MINUS])
 		return (0);
-	return (!spec->flags[zero] && i < len - ft_strlen(tmp));
+	return (!spec->flags[ZERO] && i < len - ft_strlen(tmp));
 }
 
 static int				is_zero(t_ftprintf_flags *spec, char *tmp, intmax_t len, int i)
 {
-	if (spec->flags[minus])
+	if (spec->flags[MINUS])
 		return (0);
 	return (i < len - ft_strlen(tmp));
 }
@@ -49,7 +49,7 @@ static long double		get_arg(t_ftprintf_flags *spec, va_list args)
 {
 	long double	arg;
 
-	if (spec->flags[maj_l])
+	if (spec->flags[MAJ_L])
 		arg = va_arg(args, long double);
 	else
 		arg = va_arg(args, double);
@@ -73,15 +73,15 @@ t_ftprintf					*ftprintf_handle_float(t_ftprintf_flags *spec, va_list args)
 	i = ft_tabset(2);
 	while (is_space(spec, tmp, len, i[0]))
 		rst[(i[0])++] = ' ';
-	if (tmp[i[1]] == '-' || spec->flags[plus])
+	if (tmp[i[1]] == '-' || spec->flags[PLUS])
 		rst[i[0]++] = (tmp[i[1]] == '-' ? tmp[i[1]++] : '+');
 	while (is_zero(spec, tmp, len, i[0]))
 		rst[i[0]++] = '0';
 	while (tmp[i[1]])
 		rst[i[0]++] = tmp[i[1]++];
-	while (i[0] < len && spec->flags[minus])
+	while (i[0] < len && spec->flags[MINUS])
 		rst[i[0]++] = ' ';
 	rst[i[0]] = '\0';
 	free(tmp);
-	return (ft_lstnew(rst, len));
+	return (ftprintf_lstnew(rst, len));
 }

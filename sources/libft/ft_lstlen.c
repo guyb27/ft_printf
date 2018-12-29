@@ -13,7 +13,7 @@
 
 #include "../../includes/ft_printf.h"
 
-size_t		ft_lstlen(t_ftprintf *list)
+size_t		ftprintf_lstlen(t_ftprintf *list)
 {
 	size_t	len;
 
